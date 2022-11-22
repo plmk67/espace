@@ -14,17 +14,18 @@ import * as Yup from "yup";
 import { Formik, Field, Form, useFormik } from "formik";
 import { useAuth } from "../auth-context";
 import { HiShieldCheck, HiMail, HiLockClosed, HiUser } from "react-icons/hi";
+import { config } from "../constants";
 
 const LoginForm = (props) => {
   const { isLoggedIn, setIsLoggedIn, user, setUser, loginHandler } = useAuth();
-
+  const URL = config.url;
   const [error, setError] = useState();
   const navigate = useNavigate();
 
   const onSubmit = async (values, actions) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    fetch("http://localhost:4000/api/users/signup", {
+    fetch(`${URL}/api/users/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   InputGroup,
 } from "@chakra-ui/react";
-
+import { config } from "../constants";
 import { Formik, Field, Form, useFormik } from "formik";
 import { useAuth } from "../auth-context";
 import { HiShieldCheck, HiMail, HiLockClosed } from "react-icons/hi";
@@ -18,11 +18,12 @@ const LoginForm = (props) => {
   const { setIsLoggedIn, setUser } = useAuth();
   const [error, setError] = useState();
   const navigate = useNavigate();
+  const URL = config.url;
 
   const onSubmit = async (values, actions) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    fetch("http://localhost:4000/api/users/login", {
+    fetch(`${URL}/api/users/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -59,8 +60,8 @@ const LoginForm = (props) => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      email: "vanessa_rocha@mail.com",
-      password: "Test12345",
+      email: "",
+      password: "",
     },
     onSubmit,
   });

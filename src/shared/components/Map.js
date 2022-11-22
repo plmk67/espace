@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useHttpClient } from "../http-hook";
 import { CircularProgress } from "@chakra-ui/react";
-
+import { config } from "../constants";
 const containerStyle = {
   display: "flex",
   width: "100%",
@@ -14,6 +14,8 @@ const Map = () => {
   const [mapInstance, setMapInstance] = useState();
   const [accessToken, setAccessToken] = useState();
 
+  const URL = config.url;
+
   const marker_coord = {
     lat: 45.547,
     lng: -73.627,
@@ -23,9 +25,7 @@ const Map = () => {
     const fetchToken = async () => {
       try {
         setIsLoading(true);
-        let responseData = await sendRequest(
-          `http://localhost:4000/api/places/googleMapsReq`
-        );
+        let responseData = await sendRequest(`${URL}/api/places/googleMapsReq`);
         setAccessToken(responseData.API_KEY);
         setIsLoading(false);
       } catch (err) {

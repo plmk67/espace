@@ -4,26 +4,24 @@ import Cookies from "universal-cookie";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { CircularProgress } from "@chakra-ui/react";
+import { config } from "../shared/constants";
 
 const Trips = () => {
   const { sendRequest, isLoading, setIsLoading } = useHttpClient();
   const [bookings, setBookings] = useState([]);
 
   const cookies = new Cookies();
-
+  const URL = config.url;
   let token = cookies.get("token");
-  console.log(cookies.get("token"));
 
   const user_id = localStorage.getItem("id");
-
-  console.log(user_id);
 
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
         setIsLoading(true);
         let responseData = await sendRequest(
-          `http://localhost:4000/api/bookings/trips/${user_id}`,
+          `${URL}/api/bookings/trips/${user_id}`,
           "GET",
           null,
           {

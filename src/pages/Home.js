@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { CircularProgress } from "@chakra-ui/react";
 import { useHttpClient } from "./../shared/http-hook";
-import { useAuth } from "../shared/auth-context";
 import Card from "../shared/components/Card";
-
+import { config } from "../shared/constants";
 const Home = () => {
   const [loadedPlaces, setLoadedPlaces] = useState();
   const { sendRequest, isLoading } = useHttpClient();
-
+  const URL = config.url;
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        let responseData = await sendRequest(
-          "http://localhost:4000/api/places"
-        );
+        let responseData = await sendRequest(`${URL}/api/places`);
         setLoadedPlaces(responseData.places);
       } catch (err) {
         console.log(err);
@@ -22,7 +19,6 @@ const Home = () => {
     fetchPlaces();
   }, [sendRequest]);
 
-  console.log(isLoading);
   return (
     <div className="flex justify-center bg-grey-100 pt-4">
       <div className="grid justify-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">

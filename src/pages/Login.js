@@ -10,17 +10,18 @@ import {
 import { useHttpClient } from "./../shared/http-hook";
 import { Formik, Field, Form, useFormik } from "formik";
 import { useAuth } from "../shared/auth-context";
-
+import { config } from "../shared/constants";
 const Forms = () => {
   const { isLoggedIn, setIsLoggedIn, user, setUser, loginHandler } = useAuth();
 
   const [error, setError] = useState();
   const navigate = useNavigate();
-
+  const URL = config.url;
+  
   const onSubmit = async (values, actions) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    fetch("http://localhost:4000/api/users/login", {
+    fetch(`${URL}/api/users/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",

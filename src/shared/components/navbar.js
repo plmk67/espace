@@ -12,6 +12,7 @@ import SignUp from "./signupForm";
 import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
 import { VscHome, VscAccount } from "react-icons/vsc";
+import { config } from "../constants";
 
 const Navbar = () => {
   const { isLoggedIn, setIsLoggedIn, loginPrompt, requestLogin } = useAuth();
@@ -21,7 +22,7 @@ const Navbar = () => {
   const [isSignUpOpen, setSignUp] = useState(false);
 
   let menuRef = useRef();
-
+  const URL = config.url;
   const cookies = new Cookies();
   let token = cookies.get("token");
   const username = localStorage.getItem("user");
@@ -57,7 +58,7 @@ const Navbar = () => {
   const logout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
-    fetch("http://localhost:4000/api/users/logout", {
+    fetch(`${URL}/api/users/logout`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

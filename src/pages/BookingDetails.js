@@ -6,6 +6,7 @@ import { Button, useToast } from "@chakra-ui/react";
 import Map from "../shared/components/Map";
 import { Link, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { config } from "../shared/constants";
 
 const BookingDetails = () => {
   const { id, place } = useParams();
@@ -15,13 +16,15 @@ const BookingDetails = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const URL = config.url;
+
+  console.log(URL);
+
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
         setIsLoading(true);
-        let responseData = await sendRequest(
-          `http://localhost:4000/api/places/${id}`
-        );
+        let responseData = await sendRequest(`${URL}/api/places/${id}`);
         setLoadedPlaces(responseData.place);
         setIsLoading(false);
         console.log(loadedPlaces);
@@ -33,9 +36,7 @@ const BookingDetails = () => {
     const fetchBookingInfo = async () => {
       try {
         setIsLoading(true);
-        let responseData = await sendRequest(
-          `http://localhost:4000/api/bookings/trips/${id}`
-        );
+        let responseData = await sendRequest(`${URL}/api/bookings/trips/${id}`);
         setBookingDetails(responseData.booking);
         setIsLoading(false);
       } catch (err) {
@@ -53,7 +54,7 @@ const BookingDetails = () => {
   const cancelBooking = () => {
     setIsLoading(true);
 
-    fetch(`http://localhost:4000/api/bookings/trips/${place}`, {
+    fetch(`${URL}/api/bookings/trips/${place}`, {
       method: "PATCH",
     })
       .then((response) => response.json())

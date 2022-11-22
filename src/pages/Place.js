@@ -6,6 +6,7 @@ import { Button, Input, useToast, CircularProgress } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import dayjs from "dayjs";
 import { useAuth } from "../shared/auth-context";
+import { config } from "../shared/constants";
 
 const Place = () => {
   const { id } = useParams();
@@ -19,16 +20,14 @@ const Place = () => {
   let created_time = dayjs().format("h:mm:ss A");
   //calculate day difference
   let min_date = dayjs().add(2, "days").format("YYYY-MM-DD");
-  console.log(min_date);
 
-  console.log(id);
+  const URL = config.url;
+
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
         setIsLoading(true);
-        let responseData = await sendRequest(
-          `http://localhost:4000/api/places/${id}`
-        );
+        let responseData = await sendRequest(`${URL}/api/places/${id}`);
         setLoadedPlaces(responseData.place);
         console.log(loadedPlaces);
         setIsLoading(false);
@@ -69,7 +68,7 @@ const Place = () => {
     };
 
     if (isLoggedIn) {
-      fetch("http://localhost:4000/api/bookings/create", {
+      fetch(`${URL}/api/bookings/create`, {
         method: "POST",
         headers: {
           Accept: "application/json",
