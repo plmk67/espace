@@ -171,22 +171,28 @@ const Place = () => {
 
               <div>
                 <p>
-                  Manoir Blackswan is a living space, a private gallery, and a
-                  creative studio designed with great attention to detail. Our
-                  location offers endless possibilities for Photography,
-                  Videography, Cinematography, Meetings, Podcasts & Small Events
-                  as well.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
+                  ultrices eros sit amet turpis semper, at efficitur magna
+                  mollis. Vivamus vitae vestibulum velit. Aliquam nec faucibus
+                  augue. Nullam vitae risus ligula. Etiam sed pharetra nunc. Sed
+                  porta ultrices ante, non pretium eros dictum eget. Aenean
+                  pulvinar risus lorem, quis consequat dolor feugiat vitae.
+                  Mauris vitae scelerisque purus, sit amet efficitur dui. Nulla
+                  eget turpis ac diam ornare feugiat eget eget est.
                 </p>
                 <br />
                 <p>
-                  We are located in Châteauguay, on the south shore, 30 minutes
-                  from downtown Montreal. The total floor space is more than
-                  6000 sq2. The main floor is 1500 sq2 of open space with a
-                  heated Harlequin Marble Floor, 12 ft tall ceilings, Handcarved
-                  Marble Fireplace Mantle, Plaster moldings, a 18' long Island
-                  which a 15' part is moveable for diners or conferences in
-                  front of the fireplace. There is a Art Deco Psychedelic
-                  Bathroom on the main floor as well.
+                  Nulla vulputate dui non neque feugiat pellentesque. Donec
+                  volutpat, erat a fringilla molestie, augue lectus ullamcorper
+                  diam, sit amet interdum nulla eros sit amet nisi. Vestibulum
+                  faucibus neque massa, non gravida eros sodales id. Nullam
+                  elementum erat varius neque malesuada, id pellentesque mauris
+                  porta. Etiam rutrum posuere diam, at gravida ante vestibulum
+                  id. Sed venenatis diam ultricies urna pretium pellentesque.
+                  Maecenas in fermentum nulla. Maecenas mattis nulla tincidunt
+                  tempor tempus. Duis massa mi, mollis sit amet ligula quis,
+                  sagittis ornare enim. Nullam gravida leo ultrices tempor
+                  aliquet.
                 </p>
               </div>
             </div>
