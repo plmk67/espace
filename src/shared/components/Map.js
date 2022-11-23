@@ -50,8 +50,8 @@ const Map = () => {
             mapContainerStyle={containerStyle}
             defaultOptions={{ mapTypeControl: false }}
             center={{
-              lat: 45.547,
-              lng: -73.627,
+              lat: 45.498,
+              lng: -73.589,
             }}
             zoom={16}
             onLoad={(map) => setTimeout(() => setMapInstance(map))}
@@ -59,8 +59,8 @@ const Map = () => {
             {mapInstance && (
               <Marker
                 position={{
-                  lat: 45.49,
-                  lng: -73.58,
+                  lat: 45.498,
+                  lng: -73.589,
                 }}
                 visible={true}
               />
