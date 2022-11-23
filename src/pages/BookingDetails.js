@@ -114,9 +114,7 @@ const BookingDetails = () => {
           </div>
 
           <div className="pl-2   w-full">
-            <div className="w-full h-full bg-blue-100 ">
-              <Map />
-            </div>
+            <div className="w-full h-full bg-blue-100 ">{/* <Map /> */}</div>
           </div>
         </div>
       )}
