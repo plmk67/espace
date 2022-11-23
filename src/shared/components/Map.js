@@ -26,7 +26,7 @@ const Map = () => {
       try {
         setIsLoading(true);
         let responseData = await sendRequest(
-          `http:/localhost:4000/api/places/googleMapsReq`
+          `${URL}}/api/places/googleMapsReq`
         );
         setAccessToken(responseData.API_KEY);
         setIsLoading(false);
