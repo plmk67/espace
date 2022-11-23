@@ -36,9 +36,11 @@ const Map = () => {
     fetchToken();
   }, []);
 
+  console.log(accessToken);
+
   return (
     <>
-      {isLoading && accessToken ? (
+      {isLoading ? (
         <div className="flex flex-row justify-center items-center w-full h-96 ">
           <CircularProgress isIndeterminate />
         </div>
