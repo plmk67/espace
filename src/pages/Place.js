@@ -149,7 +149,7 @@ const Place = () => {
                 src={imageUrl}
               />
             </div>
-            <div className="w-1/2 pl-2">
+            <div className=" w-1/2 pl-2">
               <div className="grid grid-cols-2 gap-2">
                 <img alt="place" src={imageUrl} />
                 <img alt="place" src={imageUrl} />
@@ -158,8 +158,8 @@ const Place = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-row max-w-screen-lg">
-            <div className="w-3/5 px-8 py-2 ">
+          <div className="flex flex-col items-center md:items-start px-6 md:flex-row  sm:flex-end max-w-screen-lg min-w-24 ">
+            <div className="md:w-3/5 ">
               <div className="text-xl font-bold pb-2">{title}</div>
 
               <div className="flex flex-row pb-4 text-sm font-light ">
@@ -191,7 +191,7 @@ const Place = () => {
               </div>
             </div>
 
-            <div className="w-2/5 pl-8">
+            <div className="pt-4 sm:w-full sm:px-6 md:w-2/5">
               <div className="border border-black rounded px-4">
                 <div className="flex flex-row justify-between items-center text-bold py-4">
                   <div className="flex pl-2 text-xl text-medium font-semibold ">
