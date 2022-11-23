@@ -75,9 +75,9 @@ const LoginForm = (props) => {
   } = useFormik({
     initialValues: {
       name: "",
-      email: "vanessa_rocha@mail.com",
-      password: "Test12345",
-      confirm_password: "Test12345",
+      email: "",
+      password: "",
+      confirm_password: "",
     },
     validationSchema: SignupSchema,
     onSubmit,

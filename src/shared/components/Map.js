@@ -25,7 +25,9 @@ const Map = () => {
     const fetchToken = async () => {
       try {
         setIsLoading(true);
-        let responseData = await sendRequest(`${URL}/api/places/googleMapsReq`);
+        let responseData = await sendRequest(
+          `http:/localhost:4000/api/places/googleMapsReq`
+        );
         setAccessToken(responseData.API_KEY);
         setIsLoading(false);
       } catch (err) {
