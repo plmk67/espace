@@ -1,8 +1,8 @@
 const production = {
-  url: "https://<project-name>.herokuapp.com",
+  url: "https://espace-backend.herokuapp.com",
 };
 const development = {
-  url: "http://localhost:4000",
+  url: "https://espace-backend.herokuapp.com",
 };
 export const config =
   process.env.NODE_ENV === "development" ? development : production;

@@ -46,7 +46,7 @@ const BookingDetails = () => {
 
     fetchBookingInfo();
     fetchPlaces();
-  }, []);
+  });
 
   const { imageUrl, title } = loadedPlaces;
   const { start_date, end_date } = bookingDetail;
