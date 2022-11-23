@@ -59,8 +59,8 @@ const Map = () => {
             {mapInstance && (
               <Marker
                 position={{
-                  lat: 45.547,
-                  lng: -73.627,
+                  lat: 45.516109,
+                  lng: -73.643059,
                 }}
                 visible={true}
               />
