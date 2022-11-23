@@ -7,7 +7,7 @@ const Card = (props) => {
 
   return (
     <div className="h-80 flex flex-col justify-between  ">
-      <div className="flex w-full h-2/3 bg-red-100 ">
+      <div className="flex w-full h-2/3">
         <img
           className="object-cover w-full rounded-lg"
           src={property.imageUrl}
