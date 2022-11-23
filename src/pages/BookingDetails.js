@@ -18,8 +18,6 @@ const BookingDetails = () => {
 
   const URL = config.url;
 
-  console.log(URL);
-
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
@@ -46,7 +44,7 @@ const BookingDetails = () => {
 
     fetchBookingInfo();
     fetchPlaces();
-  });
+  }, []);
 
   const { imageUrl, title } = loadedPlaces;
   const { start_date, end_date } = bookingDetail;
