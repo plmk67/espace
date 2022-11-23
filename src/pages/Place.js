@@ -142,14 +142,14 @@ const Place = () => {
       ) : (
         <>
           <div className="flex w-full pb-4 ">
-            <div className="w-1/2 ">
+            <div className="sm:w-full md:w-1/2 ">
               <img
                 className="min-w-full min-h-full "
                 alt="place"
                 src={imageUrl}
               />
             </div>
-            <div className=" w-1/2 pl-2">
+            <div className="sm:w-0 md:w-1/2 pl-2">
               <div className="grid grid-cols-2 gap-2">
                 <img alt="place" src={imageUrl} />
                 <img alt="place" src={imageUrl} />
@@ -159,7 +159,7 @@ const Place = () => {
             </div>
           </div>
           <div className="flex flex-col items-center md:items-start px-6 md:flex-row  sm:flex-end max-w-screen-lg min-w-24 ">
-            <div className="md:w-3/5 ">
+            <div className="sm:px-6 md:w-3/5 ">
               <div className="text-xl font-bold pb-2">{title}</div>
 
               <div className="flex flex-row pb-4 text-sm font-light ">
