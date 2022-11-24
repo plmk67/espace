@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Card = (props) => {
   const { property } = props;
+  console.log(property);
 
   return (
     <Link to={`/places/${property.id}/${property.title.toLowerCase()}`}>
@@ -16,7 +17,7 @@ const Card = (props) => {
           />
         </div>
         <div className="h-1/3 ">
-          <div className="pt-4">
+          <div className="pt-2">
             <div display="flex" alignItems="baseline">
               <div
                 className="font-light"
