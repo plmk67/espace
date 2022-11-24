@@ -80,7 +80,7 @@ const Navbar = () => {
 
   return (
     <div className="flex flex-wrap ">
-      <section className="relative mx-auto">
+      <section className="mx-auto">
         <nav className="flex justify-between bg-gray-900 text-white w-screen">
           <div className="px-5 xl:px-12 py-6 flex items-center">
             <Link
