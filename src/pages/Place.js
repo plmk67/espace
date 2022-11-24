@@ -267,7 +267,7 @@ const Place = () => {
                       <div className="flex w-full justify-between pt-4 pb-6">
                         <div className="font-bold">Total</div>
                         <div className="font-bold">
-                          ${totalCost}
+                          ${totalCost.toLocaleString()}
                           CAD
                         </div>
                       </div>
