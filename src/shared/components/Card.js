@@ -15,7 +15,7 @@ const Card = (props) => {
         />
       </div>
       <div className="h-1/3 ">
-        <div className="p-4">
+        <div className="pt-4">
           <div display="flex" alignItems="baseline">
             <div
               className="font-light"
