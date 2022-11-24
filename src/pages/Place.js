@@ -137,13 +137,13 @@ const Place = () => {
   console.log(totalCost);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="relative flex flex-col justify-center items-center">
       {isLoading ? (
         <div className="flex flex-row justify-center items-center w-full h-96 ">
           <CircularProgress isIndeterminate />
         </div>
       ) : (
-        <>
+        <div className="fixed">
           <div className="flex w-full pb-4 ">
             <div className="sm:w-full md:w-1/2 ">
               <img
@@ -285,7 +285,7 @@ const Place = () => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

@@ -17,6 +17,9 @@ const Card = (props) => {
     beds,
     baths,
     formattedPrice,
+    reviewCount,
+    city,
+    country,
   } = property;
 
   const { isLoggedIn } = useAuth();
@@ -77,7 +80,7 @@ const Card = (props) => {
             .catch((err) => console.log(err));
     } else {
       toast({
-        title: "Login or sign up to add to favourite",
+        title: "Login or sign up to add location to favourites",
         status: "info",
         duration: 5000,
         isClosable: true,
@@ -95,7 +98,7 @@ const Card = (props) => {
 
   return (
     <div className="relative">
-      <Link to={`/places/${property.id}/${property.title.toLowerCase()}`}>
+      <Link to={`/places/${id}/${title.toLowerCase()}`}>
         <div className="relative h-80 flex flex-col justify-between ">
           <div className="flex w-full h-2/3">
             <img
@@ -107,15 +110,15 @@ const Card = (props) => {
 
           <div className="h-1/3 ">
             <div className="pt-2">
-              <div display="flex">
-                <div className="font-light">
-                  {beds} beds &bull; {baths} baths
-                </div>
+              <div className="font-bold">{title}</div>
+
+              <div className="">
+                {city}, {country}
               </div>
-
-              <div className="font-bold">{property.title}</div>
-
-              <div>${formattedPrice}.00 / night</div>
+              <div className="flex flex-row">
+                <div className="font-medium">${formattedPrice}.00 </div>
+                <div>/ night</div>
+              </div>
             </div>
           </div>
         </div>
