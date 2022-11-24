@@ -131,7 +131,9 @@ const Place = () => {
     Number(cost_per_night) +
     Number(cleaning_fees) +
     Number(taxes)
-  ).toFixed(2);
+  ).toLocaleString("en");
+
+  console.log(totalCost);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -267,8 +269,7 @@ const Place = () => {
                       <div className="flex w-full justify-between pt-4 pb-6">
                         <div className="font-bold">Total</div>
                         <div className="font-bold">
-                          ${totalCost.toLocaleString()}
-                          CAD
+                          ${totalCost.toLocaleString("en-US")} CAD
                         </div>
                       </div>
                     </div>
