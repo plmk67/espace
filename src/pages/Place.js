@@ -65,6 +65,7 @@ const Place = () => {
       status: "pending",
       title: title,
       host: host,
+      imageUrl: imageUrl,
     };
 
     if (isLoggedIn) {
@@ -83,13 +84,13 @@ const Place = () => {
             ? toast({
                 title: "Please try again later",
                 status: "error",
-                duration: 9000,
+                duration: 5000,
                 isClosable: true,
               })
             : (toast({
                 title: "Booking request confirmed",
                 status: "success",
-                duration: 9000,
+                duration: 5000,
                 isClosable: true,
               }),
               navigate("/trips"))
@@ -131,7 +132,7 @@ const Place = () => {
     Number(cost_per_night) +
     Number(cleaning_fees) +
     Number(taxes)
-  ).toLocaleString("en");
+  ).toFixed(2);
 
   console.log(totalCost);
 
@@ -269,7 +270,13 @@ const Place = () => {
                       <div className="flex w-full justify-between pt-4 pb-6">
                         <div className="font-bold">Total</div>
                         <div className="font-bold">
-                          ${totalCost.toLocaleString("en-US")} CAD
+                          $
+                          {(
+                            Number(cost_per_night) +
+                            Number(cleaning_fees) +
+                            Number(taxes)
+                          ).toLocaleString("en-US")}{" "}
+                          CAD
                         </div>
                       </div>
                     </div>

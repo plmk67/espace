@@ -70,7 +70,9 @@ const Navbar = () => {
       .then((res) => res.json())
       .then((data) =>
         data.success
-          ? (localStorage.clear(), setIsLoggedIn(false))
+          ? (localStorage.clear(),
+            setIsLoggedIn(false),
+            window.location.reload())
           : console.log(data)
       )
       .catch((err) => console.log(err));

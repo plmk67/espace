@@ -17,7 +17,7 @@ const Forms = () => {
   const [error, setError] = useState();
   const navigate = useNavigate();
   const URL = config.url;
-  
+
   const onSubmit = async (values, actions) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 

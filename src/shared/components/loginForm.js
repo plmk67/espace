@@ -15,7 +15,7 @@ import { useAuth } from "../auth-context";
 import { HiShieldCheck, HiMail, HiLockClosed } from "react-icons/hi";
 
 const LoginForm = (props) => {
-  const { setIsLoggedIn, setUser } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, setUser } = useAuth();
   const [error, setError] = useState();
   const navigate = useNavigate();
   const URL = config.url;
