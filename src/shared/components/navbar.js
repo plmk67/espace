@@ -32,6 +32,7 @@ const Navbar = () => {
       toggleLogin();
       requestLogin(false);
     }
+
     let handler = (e) => {
       if (menuRef && !menuRef.current.contains(e.target)) {
         setMenu(true);

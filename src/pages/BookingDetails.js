@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import { config } from "../shared/constants";
 
 const BookingDetails = () => {
-  const { id, place } = useParams();
+  const { place, id } = useParams();
   const [loadedPlaces, setLoadedPlaces] = useState({});
   const [bookingDetail, setBookingDetails] = useState({});
   const { sendRequest, setIsLoading, isLoading } = useHttpClient();
@@ -17,6 +17,8 @@ const BookingDetails = () => {
   const navigate = useNavigate();
 
   const URL = config.url;
+  console.log(id);
+  console.log(place);
 
   useEffect(() => {
     const fetchPlaces = async () => {
@@ -34,7 +36,9 @@ const BookingDetails = () => {
     const fetchBookingInfo = async () => {
       try {
         setIsLoading(true);
-        let responseData = await sendRequest(`${URL}/api/bookings/trips/${id}`);
+        let responseData = await sendRequest(
+          `${URL}/api/bookings/trips/detail/${place}`
+        );
         setBookingDetails(responseData.booking);
         setIsLoading(false);
       } catch (err) {
@@ -48,6 +52,8 @@ const BookingDetails = () => {
 
   const { imageUrl, title } = loadedPlaces;
   const { start_date, end_date } = bookingDetail;
+
+  console.log(bookingDetail);
 
   const cancelBooking = () => {
     setIsLoading(true);

@@ -30,8 +30,9 @@ const Trips = () => {
             "Content-Type": "application/json",
           }
         );
-        setBookings(responseData.booking);
+        setBookings(responseData.bookings);
         setIsLoading(false);
+        console.log(responseData);
       } catch (err) {
         console.log(err);
       }
@@ -40,11 +41,14 @@ const Trips = () => {
     fetchPlaces();
   }, []);
 
+  console.log(bookings);
+
   //filtering place details based on attribute
 
   let cancelled_trips = [];
   let pending_trips = [];
   if (bookings) {
+    console.log(bookings);
     cancelled_trips = bookings.filter(
       (booking) => booking.status === "cancelled"
     );
@@ -79,8 +83,8 @@ const Trips = () => {
               let end_date_formatted = dayjs(end_date).format("MMM. D ,YYYY");
 
               return (
-                <Link to={`/trips/${place}/${_id}`}>
-                  <div className="flex flex-row items-center ">
+                <Link to={`/trips/${place}/${_id}`} key={_id}>
+                  <div className="flex flex-row items-center">
                     <div className="flex w-1/3 h-24">
                       <img
                         className="rounded-md  object-cover"

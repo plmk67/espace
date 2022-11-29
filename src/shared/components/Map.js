@@ -36,8 +36,6 @@ const Map = () => {
     fetchToken();
   }, []);
 
-  console.log(accessToken);
-
   return (
     <>
       {isLoading ? (

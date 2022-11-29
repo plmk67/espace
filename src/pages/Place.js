@@ -8,6 +8,10 @@ import dayjs from "dayjs";
 import { useAuth } from "../shared/auth-context";
 import { config } from "../shared/constants";
 
+import { addDays, format, addMonths, differenceInDays } from "date-fns";
+import { DateRange, DayPicker } from "react-day-picker";
+import styles from "react-day-picker/dist/style.css";
+
 const Place = () => {
   const { id } = useParams();
   const { sendRequest, setIsLoading, isLoading } = useHttpClient();
@@ -16,10 +20,29 @@ const Place = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const pastMonth = new Date();
+
+  const disabledDays = [
+    new Date(2022, 9, 20),
+    new Date(2022, 10, 30),
+    new Date(2022, 11, 5),
+    { before: new Date() },
+  ];
+
   let created_date = dayjs().format("YYYY-MM-DD");
   let created_time = dayjs().format("h:mm:ss A");
   //calculate day difference
   let min_date = dayjs().add(2, "days").format("YYYY-MM-DD");
+
+  const [range, setRange] = useState({
+    from: pastMonth,
+    to: addDays(pastMonth, 2),
+  });
+
+  let diffDays;
+  if (range) {
+    diffDays = differenceInDays(range.to, range.from);
+  }
 
   const URL = config.url;
 
@@ -66,6 +89,8 @@ const Place = () => {
       title: title,
       host: host,
       imageUrl: imageUrl,
+      start_date: range.from,
+      end_date: range.to,
     };
 
     if (isLoggedIn) {
@@ -96,8 +121,13 @@ const Place = () => {
               navigate("/trips"))
         )
         .catch((err) => console.log("error"));
-    } else if (values.start_date && values.end_date) {
-      requestLogin(true);
+    } else if (range.to && range.from) {
+      toast({
+        title: "Please sign up or login to reserve",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -121,8 +151,8 @@ const Place = () => {
     min_date = dayjs(values.start_date).add(2, "days").format("YYYY-MM-DD");
   }
 
-  let day_diff = Number(dayjs(end_date).diff(dayjs(start_date), "day"));
-  const cost_per_night = (Number(day_diff) * Number(formattedPrice)).toFixed(2);
+  // let day_diff = Number(dayjs(end_date).diff(dayjs(start_date), "day"));
+  const cost_per_night = (Number(diffDays) * Number(formattedPrice)).toFixed(2);
   const taxes = (
     (Number(formattedPrice) + Number(cleaning_fees)) *
     0.13
@@ -161,7 +191,7 @@ const Place = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center md:items-start px-6 md:flex-row  sm:flex-end max-w-screen-lg min-w-24 ">
+          <div className="flex flex-col items-center md:items-start px-6 md:flex-row  sm:flex-end min-w-screen-lg max-w-screen-xl min-w-24 ">
             <div className="sm:px-6 md:w-3/5 ">
               <div className="text-xl font-bold pb-2">{title}</div>
 
@@ -210,7 +240,19 @@ const Place = () => {
 
                 <form onSubmit={handleSubmit}>
                   <div className="flex flex-col justify-around">
-                    <p className="font-medium">Check-In</p>
+                    <div className="flex justify-center">
+                      <DayPicker
+                        mode="range"
+                        showOutsideDays
+                        defaultMonth={pastMonth}
+                        selected={range}
+                        onSelect={setRange}
+                        max={60}
+                        excludeDates={disabledDays}
+                      />
+                    </div>
+
+                    {/* <p className="font-medium">Check-In</p>
                     <Input
                       id="start_date"
                       name="start_date"
@@ -222,7 +264,9 @@ const Place = () => {
                       min={created_date}
                       isRequired
                     />
+                    <Button>Start Date</Button>
                   </div>
+
                   <div className="flex flex-col justify-around pt-2">
                     <p className="font-medium">Check-Out</p>
                     <Input
@@ -235,7 +279,7 @@ const Place = () => {
                       type="date"
                       min={min_date}
                       isRequired
-                    />
+                    /> */}
                   </div>
 
                   <div className="flex flex-row justify-center py-2">
@@ -244,11 +288,11 @@ const Place = () => {
                     </Button>
                   </div>
 
-                  {(start_date.length > 0, end_date.length > 0) && (
+                  {diffDays > 0 && (
                     <div className="flex flex-col pt-4">
                       <div className="flex w-full justify-between">
                         <div className="underline">
-                          ${formattedPrice} CAD x {day_diff} nights
+                          ${formattedPrice} CAD x {diffDays} nights
                         </div>
                         <div> ${cost_per_night} CAD</div>
                       </div>
