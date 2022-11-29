@@ -47,7 +47,7 @@ const Place = () => {
         setIsLoading(true);
         let responseData = await sendRequest(`${URL}/api/places/${id}`);
         setLoadedPlaces(responseData.place);
-        console.log(loadedPlaces);
+
         setIsLoading(false);
       } catch (err) {
         console.log(err);
@@ -98,7 +98,7 @@ const Place = () => {
         credentials: "include",
         body: JSON.stringify(updatedValues),
       })
-        .then((res) => res.json(), console.log())
+        .then((res) => res.json())
         .then((data) =>
           data.message
             ? toast({
@@ -158,8 +158,6 @@ const Place = () => {
     Number(cleaning_fees) +
     Number(taxes)
   ).toFixed(2);
-
-  console.log(totalCost);
 
   return (
     <div className="flex flex-col justify-center items-center">
