@@ -247,11 +247,8 @@ const Place = () => {
                   </div>
 
                   <div className="flex flex-row justify-center py-2">
-                    <div
-                      className="font-bold"
-                      hidden={diffDays > 0 ? true : false}
-                    >
-                      Add dates for prices
+                    <div hidden={diffDays > 0 ? true : false}>
+                      Add dates to calculate prices for your stay
                     </div>
                     <Button
                       hidden={diffDays > 0 ? false : true}
