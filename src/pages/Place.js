@@ -22,12 +22,7 @@ const Place = () => {
 
   const pastMonth = new Date();
 
-  const disabledDays = [
-    new Date(2022, 9, 20),
-    new Date(2022, 10, 30),
-    new Date(2022, 11, 5),
-    { before: new Date() },
-  ];
+  const disabledDays = { from: new Date(0, 0, 0), to: new Date() };
 
   let created_date = dayjs().format("YYYY-MM-DD");
   let created_time = dayjs().format("h:mm:ss A");
@@ -230,7 +225,7 @@ const Place = () => {
               </div>
             </div>
 
-            <div className="pt-4 sm:w-full sm:px-6 md:w-2/5">
+            <div className="pt-4 sm:w-full sm:px-6 md:w-[400px]">
               <div className="border border-black rounded px-4">
                 <div className="flex flex-row justify-between items-center text-bold py-4">
                   <div className="flex pl-2 text-xl text-medium font-semibold ">
@@ -245,45 +240,27 @@ const Place = () => {
                         mode="range"
                         showOutsideDays
                         defaultMonth={pastMonth}
+                        disabled={disabledDays}
                         selected={range}
                         onSelect={setRange}
                         max={60}
-                        excludeDates={disabledDays}
                       />
                     </div>
-
-                    {/* <p className="font-medium">Check-In</p>
-                    <Input
-                      id="start_date"
-                      name="start_date"
-                      value={values.start_date}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      size="md"
-                      type="date"
-                      min={created_date}
-                      isRequired
-                    />
-                    <Button>Start Date</Button>
-                  </div>
-
-                  <div className="flex flex-col justify-around pt-2">
-                    <p className="font-medium">Check-Out</p>
-                    <Input
-                      id="end_date"
-                      name="end_date"
-                      value={values.end_date}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      size="md"
-                      type="date"
-                      min={min_date}
-                      isRequired
-                    /> */}
                   </div>
 
                   <div className="flex flex-row justify-center py-2">
-                    <Button className="w-full" type="submit" size="lg">
+                    <div
+                      className="font-bold"
+                      hidden={diffDays > 0 ? true : false}
+                    >
+                      Add dates for prices
+                    </div>
+                    <Button
+                      hidden={diffDays > 0 ? false : true}
+                      className="w-full"
+                      type="submit"
+                      size="lg"
+                    >
                       Reserve
                     </Button>
                   </div>
@@ -291,21 +268,21 @@ const Place = () => {
                   {diffDays > 0 && (
                     <div className="flex flex-col pt-4">
                       <div className="flex w-full justify-between">
-                        <div className="underline">
+                        <div>
                           ${formattedPrice} CAD x {diffDays} nights
                         </div>
                         <div> ${cost_per_night} CAD</div>
                       </div>
                       <div className="flex w-full justify-between pt-4">
-                        <div className="underline">Cleaning Fee</div>
+                        <div>Cleaning Fee</div>
                         <div> ${cleaning_fees.toFixed(2)} CAD</div>
                       </div>
                       <div className="flex w-full justify-between pt-4">
-                        <div className="underline">Service Fee</div>
+                        <div>Service Fee</div>
                         <div> ${service_fee.toFixed(2)} CAD</div>
                       </div>
                       <div className="flex w-full justify-between pt-4">
-                        <div className="underline">Taxes</div>
+                        <div>Taxes</div>
                         <div> ${taxes} CAD</div>
                       </div>
                       <div className=" pt-4">

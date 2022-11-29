@@ -2,7 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useHttpClient } from "./../shared/http-hook";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
-import { Button, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Text,
+} from "@chakra-ui/react";
 import Map from "../shared/components/Map";
 import { Link, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -10,6 +22,7 @@ import { config } from "../shared/constants";
 
 const BookingDetails = () => {
   const { place, id } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [loadedPlaces, setLoadedPlaces] = useState({});
   const [bookingDetail, setBookingDetails] = useState({});
   const { sendRequest, setIsLoading, isLoading } = useHttpClient();
@@ -109,7 +122,7 @@ const BookingDetails = () => {
               </div>
             </div>
             <div className="pt-4">
-              <Button onClick={cancelBooking} colorScheme="red">
+              <Button onClick={onOpen} colorScheme="red">
                 Cancel Booking
               </Button>
             </div>
@@ -126,6 +139,32 @@ const BookingDetails = () => {
           </div>
         </div>
       )}
+      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Cancel Booking</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text fontWeight="bold" mb="1rem">
+              Are you sure you want to cancel this booking?
+            </Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              variant="outline"
+              colorScheme="blue"
+              mr={3}
+              onClick={onClose}
+            >
+              Close
+            </Button>
+            <Button colorScheme="red" onClick={cancelBooking}>
+              Cancel Booking
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
