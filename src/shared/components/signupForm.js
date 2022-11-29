@@ -83,7 +83,6 @@ const LoginForm = (props) => {
     onSubmit,
   });
 
-  console.log(errors);
   return (
     <div className="flex pt-2 pb-6 justify-center">
       <Formik>

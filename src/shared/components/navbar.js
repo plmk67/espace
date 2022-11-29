@@ -21,7 +21,7 @@ const Navbar = () => {
   const [isLoginOpen, setLogin] = useState(false);
   const [isSignUpOpen, setSignUp] = useState(false);
 
-  let menuRef = useRef();
+  let menuRef = useRef(null);
   const URL = config.url;
   const cookies = new Cookies();
   let token = cookies.get("token");
@@ -34,7 +34,7 @@ const Navbar = () => {
     }
 
     let handler = (e) => {
-      if (menuRef && !menuRef.current.contains(e.target)) {
+      if (menuRef.current !== null && !menuRef.current.contains(e.target)) {
         setMenu(true);
       }
     };
