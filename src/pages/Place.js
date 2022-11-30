@@ -22,13 +22,11 @@ const Place = () => {
 
   const date = new Date();
   const yesterday = date.setDate(date.getDate() - 1);
-  console.log(yesterday);
   const disabledDays = { from: new Date(0, 0, 0), to: yesterday };
 
   let created_date = dayjs().format("YYYY-MM-DD");
   let created_time = dayjs().format("h:mm:ss A");
   //calculate day difference
-  let min_date = dayjs().add(2, "days").format("YYYY-MM-DD");
 
   const [range, setRange] = useState({
     from: new Date(),
@@ -239,7 +237,7 @@ const Place = () => {
                         disabled={disabledDays}
                         selected={range}
                         onSelect={setRange}
-                        max={60}
+                        max={90}
                       />
                     </div>
                   </div>

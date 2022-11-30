@@ -11,7 +11,7 @@ import LoginForm from "./loginForm";
 import SignUp from "./signupForm";
 import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
-import { VscHome, VscAccount } from "react-icons/vsc";
+import { VscHome, VscAccount, VscMenu, VscChromeClose } from "react-icons/vsc";
 import { config } from "../constants";
 
 const Navbar = () => {
@@ -20,6 +20,7 @@ const Navbar = () => {
   const [isMenuClosed, setMenu] = useState(true);
   const [isLoginOpen, setLogin] = useState(false);
   const [isSignUpOpen, setSignUp] = useState(false);
+  const [isMobileMenuOpen, setMobileMenu] = useState(false);
 
   let menuRef = useRef(null);
   const URL = config.url;
@@ -54,6 +55,10 @@ const Navbar = () => {
 
   const toggleSignUp = () => {
     setSignUp(!isSignUpOpen);
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenu(!isMobileMenuOpen);
   };
 
   const logout = () => {
@@ -145,25 +150,60 @@ const Navbar = () => {
                   </div>
                 </>
               ) : (
-                <>
-                  <li className="pr-4">
-                    <button
-                      onClick={() => toggleSignUp()}
-                      className="hover:text-gray-200"
-                      href="/"
+                <div>
+                  <div class="flex flex-row hidden md:flex">
+                    <li className="pr-4">
+                      <button
+                        onClick={() => toggleSignUp()}
+                        className="hover:text-gray-200"
+                        href="/"
+                      >
+                        Sign Up
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => toggleLogin()}
+                        className="hover:text-gray-200"
+                      >
+                        Login
+                      </button>
+                    </li>
+                  </div>
+                  <div className="md:hidden">
+                    <div className=" ">
+                      <button onClick={() => toggleMobileMenu()}>
+                        <VscMenu size={25} />
+                      </button>
+                    </div>
+                    <div
+                      className="absolute top-0 right-0 z-20  w-full h-full text-base list-none bg-white  divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                      hidden={isMobileMenuOpen}
                     >
-                      Sign Up
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => toggleLogin()}
-                      className="hover:text-gray-200"
-                    >
-                      Login
-                    </button>
-                  </li>
-                </>
+                      <div className="flex flex-row justify-end pt-4 pr-4 w-full ">
+                        <button onClick={() => toggleMobileMenu()}>
+                          <VscChromeClose size={30} />
+                        </button>
+                      </div>
+
+                      <div className="flex flex-col ">
+                        <button
+                          onClick={() => toggleSignUp()}
+                          className="block  w-full px-4 py-2 text-3xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        >
+                          Sign Up
+                        </button>
+
+                        <button
+                          onClick={() => toggleLogin()}
+                          className="block w-full px-4 py-2 text-3xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        >
+                          Login
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               )}
             </ul>
           </div>
