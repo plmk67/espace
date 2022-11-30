@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../auth-context";
 import { Link } from "react-router-dom";
@@ -7,24 +8,12 @@ import { config } from "../constants";
 import { useToast } from "@chakra-ui/react";
 const Card = (props) => {
   const { property } = props;
-  const {
-    id,
-    user,
-    title,
-    host,
-    imageUrl,
-    imageAlt,
-    beds,
-    baths,
-    formattedPrice,
-    reviewCount,
-    city,
-    country,
-  } = property;
+  const { id, title, host, imageUrl, imageAlt, formattedPrice, city, country } =
+    property;
 
   const { isLoggedIn } = useAuth();
   const [isFavourite, setFavourite] = useState(false);
-  const [favouriteList, setFavouriteList] = useState([]);
+
   const [isLoading, setLoading] = useState(true);
   const toast = useToast();
   const URL = config.url;
@@ -48,6 +37,7 @@ const Card = (props) => {
     }
 
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
   const toggleFavourite = (e) => {

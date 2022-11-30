@@ -151,7 +151,7 @@ const Navbar = () => {
                 </>
               ) : (
                 <div>
-                  <div class="flex flex-row hidden md:flex">
+                  <div className="flex-row hidden md:flex">
                     <li className="pr-4">
                       <button
                         onClick={() => toggleSignUp()}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FormLabel,
   FormControl,
   Input,
   FormErrorMessage,
@@ -12,10 +11,10 @@ import {
 import { config } from "../constants";
 import { Formik, Field, Form, useFormik } from "formik";
 import { useAuth } from "../auth-context";
-import { HiShieldCheck, HiMail, HiLockClosed } from "react-icons/hi";
+import { HiMail, HiLockClosed } from "react-icons/hi";
 
 const LoginForm = (props) => {
-  const { isLoggedIn, setIsLoggedIn, setUser } = useAuth();
+  const { setIsLoggedIn, setUser } = useAuth();
   const [error, setError] = useState();
   const navigate = useNavigate();
   const URL = config.url;
@@ -54,7 +53,7 @@ const LoginForm = (props) => {
     values,
     errors,
     touched,
-    isSubmitting,
+
     handleBlur,
     handleChange,
     handleSubmit,

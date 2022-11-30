@@ -17,7 +17,6 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     let id = localStorage.getItem("id");
-    let userEmail = localStorage.getItem("user");
 
     if (id) {
       setIsLoggedIn(true);

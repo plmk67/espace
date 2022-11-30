@@ -1,22 +1,22 @@
-/* eslint-disable no-unreachable */
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useHttpClient } from "./../shared/http-hook";
-import { Button, Input, useToast, CircularProgress } from "@chakra-ui/react";
+import { Button, useToast, CircularProgress } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import dayjs from "dayjs";
 import { useAuth } from "../shared/auth-context";
 import { config } from "../shared/constants";
 
-import { addDays, format, addMonths, differenceInDays } from "date-fns";
-import { DateRange, DayPicker } from "react-day-picker";
+import { addDays, differenceInDays } from "date-fns";
+import { DayPicker } from "react-day-picker";
+// eslint-disable-next-line no-unused-vars
 import styles from "react-day-picker/dist/style.css";
 
 const Place = () => {
   const { id } = useParams();
   const { sendRequest, setIsLoading, isLoading } = useHttpClient();
   const [loadedPlaces, setLoadedPlaces] = useState({});
-  const { isLoggedIn, requestLogin } = useAuth();
+  const { isLoggedIn } = useAuth();
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -54,6 +54,7 @@ const Place = () => {
     };
 
     fetchPlaces();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setLoadedPlaces]);
 
   let reqUser = localStorage.getItem("id");
@@ -61,12 +62,10 @@ const Place = () => {
 
   const {
     imageUrl,
-    bed,
-    baths,
+
     title,
     formattedPrice,
-    reviewCount,
-    rating,
+
     cleaning_fees,
     service_fee,
     city,
@@ -125,7 +124,7 @@ const Place = () => {
     }
   };
 
-  const { values, handleBlur, handleChange, handleSubmit } = useFormik({
+  const { handleSubmit } = useFormik({
     initialValues: {
       place: id,
       created_date: created_date,
@@ -139,8 +138,6 @@ const Place = () => {
     },
     onSubmit,
   });
-
-  const { start_date, end_date } = values;
 
   // let day_diff = Number(dayjs(end_date).diff(dayjs(start_date), "day"));
   const cost_per_night = (Number(diffDays) * Number(formattedPrice)).toFixed(2);
