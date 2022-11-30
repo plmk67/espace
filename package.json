@@ -16,6 +16,7 @@
     "cookie-parser": "^1.4.6",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.6",
+    "dompurify": "^2.4.1",
     "formik": "^2.2.9",
     "framer-motion": "^7.5.3",
     "moment": "^2.29.4",

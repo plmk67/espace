@@ -15,6 +15,7 @@ import { Formik, Field, Form, useFormik } from "formik";
 import { useAuth } from "../auth-context";
 import { HiShieldCheck, HiMail, HiLockClosed, HiUser } from "react-icons/hi";
 import { config } from "../constants";
+import dompurify from "dompurify";
 
 const LoginForm = (props) => {
   const { isLoggedIn, setIsLoggedIn, user, setUser, loginHandler } = useAuth();
@@ -53,11 +54,24 @@ const LoginForm = (props) => {
     actions.resetForm();
   };
 
+  // const cleanData = (input) => {
+  //   return DOMPurify.sanitize(input);
+  // };
+
   const SignupSchema = Yup.object().shape({
-    name: Yup.string().required("Required"),
-    email: Yup.string().email("Invalid email").required("Required"),
+    name: Yup.string()
+      .required("Required")
+      .max(30)
+      .matches(/^[a-zA-Z0-9]+$/, "Please remove special characters"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Required")
+      .max(30)
+      .matches(/^[a-zA-Z0-9]+@/, "Please remove special characters"),
     password: Yup.string()
       .min(8, "Password must be 8 or more characters")
+      // .matches(/[a-z]/, "Needs at least one lowercase character")
+      // .matches(/[A-Z]/, "Needs at least one uppercase character")
       .required("Required"),
     confirm_password: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -72,6 +86,7 @@ const LoginForm = (props) => {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       name: "",
@@ -82,6 +97,16 @@ const LoginForm = (props) => {
     validationSchema: SignupSchema,
     onSubmit,
   });
+
+  // const sanitizeInput = (input) => {
+  //   console.log(input);
+  //   let inputValue = dompurify.sanitize(input);
+  //   handleChange(input);
+
+  //   setFieldValue(formFieldName, inputValue);
+  // };
+
+  // console.log(values);
 
   return (
     <div className="flex pt-2 pb-6 justify-center">

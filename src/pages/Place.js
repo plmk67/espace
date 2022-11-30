@@ -20,9 +20,10 @@ const Place = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const pastMonth = new Date();
-
-  const disabledDays = { from: new Date(0, 0, 0), to: new Date() };
+  const date = new Date();
+  const yesterday = date.setDate(date.getDate() - 1);
+  console.log(yesterday);
+  const disabledDays = { from: new Date(0, 0, 0), to: yesterday };
 
   let created_date = dayjs().format("YYYY-MM-DD");
   let created_time = dayjs().format("h:mm:ss A");
@@ -30,8 +31,8 @@ const Place = () => {
   let min_date = dayjs().add(2, "days").format("YYYY-MM-DD");
 
   const [range, setRange] = useState({
-    from: pastMonth,
-    to: addDays(pastMonth, 2),
+    from: new Date(),
+    to: addDays(new Date(), 2),
   });
 
   let diffDays;
@@ -142,9 +143,6 @@ const Place = () => {
   });
 
   const { start_date, end_date } = values;
-  if (values.start_date) {
-    min_date = dayjs(values.start_date).add(2, "days").format("YYYY-MM-DD");
-  }
 
   // let day_diff = Number(dayjs(end_date).diff(dayjs(start_date), "day"));
   const cost_per_night = (Number(diffDays) * Number(formattedPrice)).toFixed(2);
@@ -237,7 +235,7 @@ const Place = () => {
                       <DayPicker
                         mode="range"
                         showOutsideDays
-                        defaultMonth={pastMonth}
+                        defaultMonth={new Date()}
                         disabled={disabledDays}
                         selected={range}
                         onSelect={setRange}
