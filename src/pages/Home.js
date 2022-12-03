@@ -6,7 +6,6 @@ import { config } from "../shared/constants";
 
 const Home = () => {
   const [loadedPlaces, setLoadedPlaces] = useState();
-
   const { sendRequest, isLoading } = useHttpClient();
   const URL = config.url;
 
@@ -20,8 +19,7 @@ const Home = () => {
       }
     };
     fetchPlaces();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [URL, sendRequest]);
 
   return (
     <div className="flex justify-center bg-grey-100 pt-4">

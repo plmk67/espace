@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FormLabel,
   FormControl,
   Input,
   FormErrorMessage,
   Button,
-  FormHelperText,
   InputLeftElement,
   InputGroup,
 } from "@chakra-ui/react";
@@ -15,10 +13,9 @@ import { Formik, Field, Form, useFormik } from "formik";
 import { useAuth } from "../auth-context";
 import { HiShieldCheck, HiMail, HiLockClosed, HiUser } from "react-icons/hi";
 import { config } from "../constants";
-import dompurify from "dompurify";
 
 const LoginForm = (props) => {
-  const { isLoggedIn, setIsLoggedIn, user, setUser, loginHandler } = useAuth();
+  const { setIsLoggedIn, setUser } = useAuth();
   const URL = config.url;
   const [error, setError] = useState();
   const navigate = useNavigate();
@@ -82,11 +79,10 @@ const LoginForm = (props) => {
     values,
     errors,
     touched,
-    isSubmitting,
+
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue,
   } = useFormik({
     initialValues: {
       name: "",
@@ -99,7 +95,6 @@ const LoginForm = (props) => {
   });
 
   // const sanitizeInput = (input) => {
-  //   console.log(input);
   //   let inputValue = dompurify.sanitize(input);
   //   handleChange(input);
 

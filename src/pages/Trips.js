@@ -39,20 +39,13 @@ const Trips = () => {
     };
 
     fetchPlaces();
-  }, []);
-
-  console.log(bookings);
+  }, [URL, sendRequest, setIsLoading, setBookings, token, user_id]);
 
   //filtering place details based on attribute
 
-  let cancelled_trips = [];
   let pending_trips = [];
-  if (bookings) {
-    console.log(bookings);
-    cancelled_trips = bookings.filter(
-      (booking) => booking.status === "cancelled"
-    );
 
+  if (bookings) {
     pending_trips = bookings.filter((booking) => booking.status === "pending");
   }
 

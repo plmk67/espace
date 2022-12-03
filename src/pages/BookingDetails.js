@@ -30,8 +30,6 @@ const BookingDetails = () => {
   const navigate = useNavigate();
 
   const URL = config.url;
-  console.log(id);
-  console.log(place);
 
   useEffect(() => {
     const fetchPlaces = async () => {
@@ -40,7 +38,6 @@ const BookingDetails = () => {
         let responseData = await sendRequest(`${URL}/api/places/${id}`);
         setLoadedPlaces(responseData.place);
         setIsLoading(false);
-        console.log(loadedPlaces);
       } catch (err) {
         console.log(err);
       }
@@ -61,12 +58,10 @@ const BookingDetails = () => {
 
     fetchBookingInfo();
     fetchPlaces();
-  }, []);
+  }, [URL, id, place, sendRequest, setIsLoading]);
 
   const { imageUrl, title } = loadedPlaces;
   const { start_date, end_date } = bookingDetail;
-
-  console.log(bookingDetail);
 
   const cancelBooking = () => {
     setIsLoading(true);

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FormLabel,
@@ -7,20 +7,18 @@ import {
   FormErrorMessage,
   Button,
 } from "@chakra-ui/react";
-import { useHttpClient } from "./../shared/http-hook";
+
 import { Formik, Field, Form, useFormik } from "formik";
 import { useAuth } from "../shared/auth-context";
 import { config } from "../shared/constants";
 const Forms = () => {
-  const { isLoggedIn, setIsLoggedIn, user, setUser, loginHandler } = useAuth();
+  const { setIsLoggedIn, setUser } = useAuth();
 
   const [error, setError] = useState();
   const navigate = useNavigate();
   const URL = config.url;
 
   const onSubmit = async (values, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     fetch(`${URL}/api/users/login`, {
       method: "POST",
       headers: {
