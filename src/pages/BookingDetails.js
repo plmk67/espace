@@ -39,7 +39,12 @@ const BookingDetails = () => {
         setLoadedPlaces(responseData.place);
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        toast({
+          title: "Cannot get booking information, please try again later",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     };
 
@@ -52,7 +57,12 @@ const BookingDetails = () => {
         setBookingDetails(responseData.booking);
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        toast({
+          title: "Cannot get trips information, please try again later",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     };
 
@@ -80,7 +90,12 @@ const BookingDetails = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        toast({
+          title: "Cannot cancel booking, please try again later",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       });
   };
 

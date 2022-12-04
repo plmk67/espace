@@ -6,6 +6,7 @@ import {
   Input,
   FormErrorMessage,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 
 import { Formik, Field, Form, useFormik } from "formik";
@@ -15,6 +16,7 @@ const Forms = () => {
   const { setIsLoggedIn, setUser } = useAuth();
 
   const [error, setError] = useState();
+  const toast = useToast();
   const navigate = useNavigate();
   const URL = config.url;
 
@@ -38,13 +40,19 @@ const Forms = () => {
               last_name: data.last_name,
             }),
             setError(false),
-            console.log(data),
             localStorage.setItem("user", data.email),
             localStorage.setItem("id", data.id),
             navigate("/"))
           : (setIsLoggedIn(false), setError(data.message))
       )
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        toast({
+          title: "Cannot create booking, please try again later",
+          status: "alert",
+          duration: 9000,
+          isClosable: true,
+        })
+      );
 
     actions.resetForm();
   };

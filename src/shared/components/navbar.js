@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalCloseButton,
   ModalHeader,
+  useToast,
 } from "@chakra-ui/react";
 import LoginForm from "./loginForm";
 import SignUp from "./signupForm";
@@ -25,6 +26,7 @@ const Navbar = () => {
   let menuRef = useRef(null);
   const URL = config.url;
   const cookies = new Cookies();
+  const toast = useToast();
   let token = cookies.get("token");
   const username = localStorage.getItem("user");
 
@@ -79,9 +81,21 @@ const Navbar = () => {
           ? (localStorage.clear(),
             setIsLoggedIn(false),
             window.location.reload())
-          : console.log(data)
+          : toast({
+              title: "Cannot logout, please try again later",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            })
       )
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        toast({
+          title: "Cannot logout, please try again later",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      );
   };
 
   return (

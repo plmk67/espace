@@ -3,7 +3,7 @@ import { useHttpClient } from "./../shared/http-hook";
 import Cookies from "universal-cookie";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { CircularProgress } from "@chakra-ui/react";
+import { CircularProgress, useToast } from "@chakra-ui/react";
 import { config } from "../shared/constants";
 
 const Trips = () => {
@@ -13,6 +13,8 @@ const Trips = () => {
   const cookies = new Cookies();
   const URL = config.url;
   let token = cookies.get("token");
+
+  const toast = useToast();
 
   const user_id = localStorage.getItem("id");
 
@@ -32,14 +34,18 @@ const Trips = () => {
         );
         setBookings(responseData.bookings);
         setIsLoading(false);
-        console.log(responseData);
       } catch (err) {
-        console.log(err);
+        toast({
+          title: "Cannot load places, please try again later",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     };
 
     fetchPlaces();
-  }, [URL, sendRequest, setIsLoading, setBookings, token, user_id]);
+  }, [URL, sendRequest, setIsLoading, setBookings, token, user_id, toast]);
 
   //filtering place details based on attribute
 
