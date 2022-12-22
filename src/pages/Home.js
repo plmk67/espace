@@ -30,9 +30,10 @@ const Home = () => {
           </div>
         ) : (
           <>
-            {loadedPlaces.map((property, index) => {
-              return <Card property={property} key={index} />;
-            })}
+            {loadedPlaces &&
+              loadedPlaces.map((property, index) => {
+                return <Card property={property} key={index} />;
+              })}
           </>
         )}
       </div>
