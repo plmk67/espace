@@ -9,13 +9,10 @@ import { config } from "../shared/constants";
 const Trips = () => {
   const { sendRequest, isLoading, setIsLoading } = useHttpClient();
   const [bookings, setBookings] = useState([]);
-
   const cookies = new Cookies();
-  const URL = config.url;
   let token = cookies.get("token");
-
+  const URL = config.url;
   const toast = useToast();
-
   const user_id = localStorage.getItem("id");
 
   useEffect(() => {
@@ -35,6 +32,7 @@ const Trips = () => {
         setBookings(responseData.bookings);
         setIsLoading(false);
       } catch (err) {
+        console.log(err);
         toast({
           title: "Cannot load places, please try again later",
           status: "error",
