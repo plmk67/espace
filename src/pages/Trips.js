@@ -15,7 +15,7 @@ const Trips = () => {
   const toast = useToast();
   const user_id = localStorage.getItem("id");
 
-
+  console.log(token);
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
