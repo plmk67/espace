@@ -15,6 +15,7 @@ const Trips = () => {
   const toast = useToast();
   const user_id = localStorage.getItem("id");
 
+
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
@@ -25,8 +26,6 @@ const Trips = () => {
           null,
           {
             Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
           }
         );
         setBookings(responseData.bookings);
