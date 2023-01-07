@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useHttpClient } from "./../shared/http-hook";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { CircularProgress, useToast } from "@chakra-ui/react";
 import { config } from "../shared/constants";
+import Cookies from "js-cookie";
 
 const Trips = () => {
   const { sendRequest, isLoading, setIsLoading } = useHttpClient();
   const [bookings, setBookings] = useState([]);
-  const cookies = new Cookies();
-  let token = cookies.get("token");
+  // const cookies = new Cookies();
+  // let token = cookies.get("token");
+
+  const token = Cookies.get("token");
   const URL = config.url;
   const toast = useToast();
   const user_id = localStorage.getItem("id");
 
   console.log(token);
+
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
