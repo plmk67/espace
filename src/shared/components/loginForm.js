@@ -41,6 +41,7 @@ const LoginForm = (props) => {
             }),
             localStorage.setItem("user", data.email),
             localStorage.setItem("id", data.id),
+            localStorage.setItem("token", data.token),
             props.onClose(),
             navigate("/"))
           : setError(data.message)

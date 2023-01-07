@@ -13,10 +13,10 @@ const Trips = () => {
   // const cookies = new Cookies();
   // let token = cookies.get("token");
 
-  const token = Cookies.get("token");
   const URL = config.url;
   const toast = useToast();
   const user_id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
 
   console.log(token);
 
