@@ -31,6 +31,8 @@ const BookingDetails = () => {
 
   const URL = config.url;
 
+  const { status } = bookingDetail;
+
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
@@ -132,9 +134,11 @@ const BookingDetails = () => {
               </div>
             </div>
             <div className="pt-4">
-              <Button onClick={onOpen} colorScheme="red">
-                Cancel Booking
-              </Button>
+              {status && status === "pending" ? (
+                <Button onClick={onOpen} colorScheme="red">
+                  Cancel Booking
+                </Button>
+              ) : null}
             </div>
             {/* <div className="pl-4 ">
               <h1 className="py-2 text-xl font-bold">Your Booking Details</h1>

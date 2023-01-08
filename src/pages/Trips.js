@@ -18,8 +18,6 @@ const Trips = () => {
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
 
-  console.log(token);
-
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
@@ -51,9 +49,13 @@ const Trips = () => {
   //filtering place details based on attribute
 
   let pending_trips = [];
+  let cancelled_trips = [];
 
   if (bookings) {
     pending_trips = bookings.filter((booking) => booking.status === "pending");
+    cancelled_trips = bookings.filter(
+      (booking) => booking.status === "cancelled"
+    );
   }
 
   return (
@@ -66,7 +68,7 @@ const Trips = () => {
           <CircularProgress isIndeterminate />
         </div>
       ) : (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4 max-w-7xl ">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-2 max-w-7xl ">
           {bookings &&
             pending_trips.map((booking) => {
               const {
@@ -85,9 +87,60 @@ const Trips = () => {
               return (
                 <Link to={`/trips/${place}/${_id}`} key={_id}>
                   <div className="flex flex-row items-center">
-                    <div className="flex w-1/3 h-24">
+                    <div className="flex justify-center w-24 h-24 ">
                       <img
-                        className="rounded-md  object-cover"
+                        className="w-full object-cover rounded-md"
+                        src={imageUrl}
+                        alt="treehouse"
+                      />
+                    </div>
+                    <div className="flex flex-col w-2/3 pl-4 gap justify-center h-full">
+                      <div className="font-bold truncate text-ellipsis">
+                        {title}
+                      </div>
+                      <div className="text-slate-600 truncate text-ellipsis">
+                        Hosted by: {host}
+                      </div>
+                      <div className="text-slate-600 truncate text-ellipsis">
+                        {start_date_formatted} - {end_date_formatted}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+        </div>
+      )}
+      <h1 className="pl-4 pt-8 pb-2 text-xl font-bold ">
+        Canceled trips ({bookings ? cancelled_trips.length : 0})
+      </h1>
+      {isLoading ? (
+        <div className="flex flex-row justify-center items-center h-full ">
+          <CircularProgress isIndeterminate />
+        </div>
+      ) : (
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-2 max-w-7xl ">
+          {bookings &&
+            cancelled_trips.map((booking) => {
+              const {
+                start_date,
+                end_date,
+                place,
+                host,
+                title,
+                _id,
+                imageUrl,
+              } = booking;
+              let start_date_formatted =
+                dayjs(start_date).format("MMM. D ,YYYY");
+              let end_date_formatted = dayjs(end_date).format("MMM. D ,YYYY");
+
+              return (
+                <Link to={`/trips/${place}/${_id}`} key={_id}>
+                  <div className="flex flex-row items-center">
+                    <div className="flex justify-center w-24 h-24">
+                      <img
+                        className="w-full object-cover rounded-md"
                         src={imageUrl}
                         alt="treehouse"
                       />
